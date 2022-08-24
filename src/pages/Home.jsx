@@ -6,6 +6,7 @@ const Home = () => {
   // const [data, setData] = useState(data);
   const [score, setScore] = useState(0);
   const [round, setRound] = useState(1);
+  const [selectedAnswer, setSelectedAnswer] = useState("");
 
   return (
     <main>

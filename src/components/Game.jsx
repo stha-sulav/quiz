@@ -1,28 +1,26 @@
 import React from "react";
 import data from "../data";
+import "../styles/Game.css";
 
 const Game = ({ score }) => {
   const { question, correct_answer, incorrect_answers } = data[score];
 
-  const answers = { ...incorrect_answers, 4: correct_answer };
+  const answersObj = { ...incorrect_answers, 4: correct_answer };
 
-  const answersLength = Object.keys(answers).length;
+  const answerArr = Object.values(answersObj);
 
-  let randomAnswers = {};
-
-  const random = Math.ceil(Math.random() * answersLength - 1);
-  const buttons = Object.values(answers).map((item, index) => {
-    if (!randomAnswers.hasOwnProperty(random)) {
-      randomAnswers = { ...randomAnswers, item };
-    }
-  });
-
-  console.log(buttons);
+  const randomAnswer = answerArr.sort(() => Math.random() - 0.5);
 
   return (
-    <section>
+    <section className="question-answer">
       <h1 className="question">{question}</h1>
-      <div className="options">{buttons}</div>
+      <div className="options">
+        {randomAnswer.map((item, index) => (
+          <button className="option-btn" key={index}>
+            {item}
+          </button>
+        ))}
+      </div>
     </section>
   );
 };

@@ -1,0 +1,26 @@
+.question-answer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  place-items: center;
+  padding: 1.75rem;
+}
+
+.option-btn {
+  background-color: transparent;
+  outline: none;
+  border: 2px solid #319da0;
+  width: 250px;
+  padding: 1rem;
+}
+
+.option-btn:hover,
+.option-btn:active {
+  border-color: #333;
+}

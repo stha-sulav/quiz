@@ -1,0 +1,13 @@
+nav {
+  background-color: #781c68;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 4rem;
+  color: #fff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}

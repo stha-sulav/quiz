@@ -1,0 +1,32 @@
+main {
+  background-color: #fff5e1;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  background-color: #319da0;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.btn:hover {
+  text-decoration: underline;
+}
+
+.btn:active {
+  transform: scale(0.9);
+  text-decoration: none;
+}

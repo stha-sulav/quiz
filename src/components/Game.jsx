@@ -1,19 +1,23 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import data from "../data";
+import {
+  getCorrectAnswer,
+  getQuestions,
+  getShuffeldAnswers,
+} from "../features/gameSlice";
 import "../styles/Game.css";
 
-const Game = ({ score, round, selectedAnswer, setSelectedAnswer }) => {
-  const { question, correct_answer, incorrect_answers } = data[score];
-
-  const answerArr = [...incorrect_answers, correct_answer];
-
-  const randomAnswer = answerArr.sort(() => Math.random() - 0.5);
+const Game = () => {
+  const question = useSelector(getQuestions);
+  const answers = useSelector(getShuffeldAnswers);
+  const correctAnswer = useSelector(getCorrectAnswer);
 
   return (
     <section className="question-answer">
       <h1 className="question">{question}</h1>
       <div className="options">
-        {randomAnswer.map((item, index) => (
+        {answers.map((item, index) => (
           <button className="option-btn" key={index}>
             {item}
           </button>

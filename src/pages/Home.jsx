@@ -3,8 +3,13 @@ import Game from "../components/Game";
 import "../styles/Home.css";
 import gameApi from "../api";
 import data from "../data";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllQuiz, getData } from "../features/gameSlice";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const quizData = useSelector(getAllQuiz);
+
   const [gameData, setGameData] = useState(data);
   const [score, setScore] = useState(0);
   const [round, setRound] = useState(1);
@@ -17,37 +22,24 @@ const Home = () => {
     fetchQnA();
   }, []);
 
-  const setState = (prevState) => {
-    prevState + 1;
-  };
-
-  const selectAnswer = (e) => {
-    const { textContext } = e.target;
-
-    setSelectedAnswer(textContext);
-
-    if (round > 4) {
-      setDifficulty("mideium");
-    } else if (round > 7) {
-      setDifficulty("hard");
-    } else {
-      setDifficulty("easy");
-    }
-
-    if (selectedAnswer === correct_answer) {
-      setRound(setState(prevState));
-      setScore(setState(prevState));
-    }
-  };
+  useState(() => {
+    const resetToken = async () => {
+      await gameApi.get(
+        `https://opentdb.com/api_token.php?command=reset&token=942a23c3f76e3177a4de18f3902754f67e6ff58699212b0e31697fa218c70362`
+      );
+    };
+    resetToken();
+  });
 
   const fetchQnA = async () => {
-    const response = await gameApi.get(
-      `/api.php?amount=1&difficulty=${difficulty}&type=multiple&token=279398dc11bd23adfcacc9b75deba7acaa156e1a7b04174498d0d55e8aa63b36`
-    );
-    setGameData(response.data.results);
-  };
+    const response = await gameApi
+      .get(
+        `/api.php?amount=10&difficulty=${difficulty}&type=multiple&token=942a23c3f76e3177a4de18f3902754f67e6ff58699212b0e31697fa218c70362`
+      )
+      .catch((err) => console.log("Err: ", err));
 
-  console.log(gameData);
+    dispatch(getData(response.data.results));
+  };
 
   return (
     <main>

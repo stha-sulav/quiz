@@ -21,6 +21,10 @@
 }
 
 .option-btn:hover,
-.option-btn:active {
+.option-btn:focus {
   border-color: #333;
+}
+
+.option-btn:active {
+  transform: scale(0.9);
 }

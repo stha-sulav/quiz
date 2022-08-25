@@ -2,12 +2,10 @@ import React from "react";
 import data from "../data";
 import "../styles/Game.css";
 
-const Game = ({ score }) => {
+const Game = ({ score, round, selectedAnswer, setSelectedAnswer }) => {
   const { question, correct_answer, incorrect_answers } = data[score];
 
-  const answersObj = { ...incorrect_answers, 4: correct_answer };
-
-  const answerArr = Object.values(answersObj);
+  const answerArr = [...incorrect_answers, correct_answer];
 
   const randomAnswer = answerArr.sort(() => Math.random() - 0.5);
 

@@ -13,6 +13,10 @@ main {
   gap: 1.5rem;
 }
 
+.score span {
+  color: #319da0;
+}
+
 .btn-container {
   width: 20%;
   display: flex;

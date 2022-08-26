@@ -3,9 +3,16 @@ import Game from "../components/Game";
 import "../styles/Home.css";
 import gameApi from "../api";
 import { useDispatch, useSelector } from "react-redux";
-import { getDifficulty, getRound, getScore } from "../features/gameSlice";
+import {
+  getDifficulty,
+  getRound,
+  getScore,
+  Restart,
+  setDifficulty,
+} from "../features/gameSlice";
 import { getAnswers } from "../features/answerSlice";
 import { getQuestion } from "../features/questionSlice";
+import { Inc } from "../features/gameSlice";
 
 const Home = () => {
   const [token, setToken] = useState("");
@@ -31,6 +38,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchQnA();
+    dispatch(setDifficulty());
   }, [round]);
 
   const fetchQnA = async () => {
@@ -50,18 +58,34 @@ const Home = () => {
     );
   };
 
+  const handleSelectClick = () => {
+    dispatch(Inc({ round: 1, score: 0 }));
+  };
+
+  const handleResetClick = () => {
+    dispatch(Restart());
+  };
+
   return (
     <main>
       <section className="header">
         <h1 className="round">Question Number : {round}/10</h1>
-        <h4 className="score">
+        <h3 className="score">
           Score : <span>{score}</span>
-        </h4>
+        </h3>
       </section>
       <Game />
       <div className="btn-container">
-        <button className="btn">restart</button>
-        <button className="btn">select</button>
+        <button className="btn" onClick={handleResetClick}>
+          restart
+        </button>
+        <button
+          className="btn"
+          onClick={handleSelectClick}
+          disabled={round > 9}
+        >
+          select
+        </button>
       </div>
     </main>
   );

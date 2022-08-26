@@ -13,12 +13,26 @@ const gameSlice = createSlice({
     Inc: (state, { payload }) => {
       state.score += payload.score;
       state.round += payload.round;
+      console.log(payload);
+    },
+    setDifficulty: (state) => {
+      if (state.round > 4 && state.round < 7) {
+        state.difficulty = "medium";
+      } else if (state.round > 7) {
+        state.difficulty = "hard";
+      } else {
+        state.difficulty = "easy";
+      }
+    },
+    Restart: (state) => {
+      state.round = 1;
+      state.score = 0;
     },
   },
 });
 
 export const gameReducer = gameSlice.reducer;
-export const { Inc } = gameSlice.actions;
+export const { Inc, setDifficulty, Restart } = gameSlice.actions;
 
 export const getRound = (state) => state.quiz.round;
 export const getScore = (state) => state.quiz.score;

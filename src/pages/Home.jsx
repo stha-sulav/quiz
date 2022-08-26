@@ -3,17 +3,13 @@ import Game from "../components/Game";
 import "../styles/Home.css";
 import gameApi from "../api";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAnswers,
-  getData,
-  getDifficulty,
-  getQuestion,
-  getQuestions,
-  getRound,
-  getScore,
-} from "../features/gameSlice";
+import { getDifficulty, getRound, getScore } from "../features/gameSlice";
+import { getAnswers } from "../features/answerSlice";
+import { getQuestion } from "../features/questionSlice";
 
 const Home = () => {
+  const [token, setToken] = useState("");
+
   const dispatch = useDispatch();
 
   const round = useSelector(getRound);
@@ -21,12 +17,16 @@ const Home = () => {
   const difficulty = useSelector(getDifficulty);
 
   useState(() => {
-    const resetToken = async () => {
-      await gameApi.get(
-        `https://opentdb.com/api_token.php?command=reset&token=942a23c3f76e3177a4de18f3902754f67e6ff58699212b0e31697fa218c70362`
-      );
+    const configureToken = async () => {
+      const response = await gameApi.get(`/api_token.php?command=request`);
+      if (response.data.response_code === 1) {
+        await gameApi.get(`/api_token.php?command=reset&token=${token}`);
+        console.log("hello");
+      }
+      setToken(response.data.token);
     };
-    resetToken();
+
+    configureToken();
   }, []);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Home = () => {
   const fetchQnA = async () => {
     const response = await gameApi
       .get(
-        `/api.php?amount=1&difficulty=${difficulty}&type=multiple&token=942a23c3f76e3177a4de18f3902754f67e6ff58699212b0e31697fa218c70362`
+        `/api.php?amount=1&difficulty=${difficulty}&type=multiple&token=${token}`
       )
       .catch((err) => console.log("Err: ", err));
 
@@ -48,19 +48,21 @@ const Home = () => {
         correct_answer: data.correct_answer,
       })
     );
-    // dispatch(getData(response.data.results));
   };
 
   return (
     <main>
       <section className="header">
-        <h1 className="round">Question Number : {round}</h1>
+        <h1 className="round">Question Number : {round}/10</h1>
         <h4 className="score">
           Score : <span>{score}</span>
         </h4>
       </section>
       <Game />
-      {/* <button className="btn">start</button> */}
+      <div className="btn-container">
+        <button className="btn">restart</button>
+        <button className="btn">select</button>
+      </div>
     </main>
   );
 };

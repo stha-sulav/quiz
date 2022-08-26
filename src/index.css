@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700&display=swap");
+
 *,
 *::before,
 *::after {
@@ -8,6 +10,7 @@
 
 body {
   background-color: #fff5e1;
+  font-family: "Roboto Slab", serif;
 }
 
 a {
@@ -23,8 +26,8 @@ button {
   padding: 0.5rem 1.25rem;
   text-transform: capitalize;
   letter-spacing: 1.75px;
-  font-weight: 600;
   font-size: inherit;
+  font-weight: normal;
   border-radius: 4px;
   transition: 0.25s;
 }

@@ -13,11 +13,18 @@ main {
   gap: 1.5rem;
 }
 
+.btn-container {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .btn {
   border: none;
   outline: none;
   background-color: #319da0;
   border-radius: 4px;
+  font-size: 1.25rem;
   color: #fff;
 }
 

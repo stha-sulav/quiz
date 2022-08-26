@@ -1,11 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import data from "../data";
-import {
-  getCorrectAnswer,
-  getQuestions,
-  getShuffeldAnswers,
-} from "../features/gameSlice";
+import { getCorrectAnswer, getShuffeldAnswers } from "../features/answerSlice";
+import { getQuestions } from "../features/questionSlice";
+
 import "../styles/Game.css";
 
 const Game = () => {

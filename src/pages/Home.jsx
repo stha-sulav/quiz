@@ -65,11 +65,11 @@ const Home = () => {
     );
   };
 
-  const handleSelect = () => {
+  const handleSelect = (rounds = 0, scores = 0) => {
     if (userAnswer === correctAnswer) {
-      dispatch(Inc({ round: 1, score: 1 }));
+      dispatch(Inc({ round: rounds, score: scores }));
     } else {
-      dispatch(Inc({ round: 1, score: 0 }));
+      dispatch(Inc({ round: rounds, score: scores }));
     }
     console.log(userAnswer);
   };
@@ -96,8 +96,11 @@ const Home = () => {
         <button className="btn" onClick={handleResetClick}>
           restart
         </button>
-        <button className="btn" onClick={handleSelect}>
-          select
+        <button className="btn" onClick={() => handleSelect(0, 1)}>
+          check answer
+        </button>
+        <button className="btn" onClick={() => handleSelect(1, 0)}>
+          next question
         </button>
       </div>
     </main>

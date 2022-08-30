@@ -10,7 +10,12 @@ import {
   Restart,
   setDifficulty,
 } from "../features/gameSlice";
-import { getAnswers } from "../features/answerSlice";
+import {
+  getAnswers,
+  getCorrectAnswer,
+  getSelectedAnswer,
+  setSelectedAnswer,
+} from "../features/answerSlice";
 import { getQuestion } from "../features/questionSlice";
 import { Inc } from "../features/gameSlice";
 
@@ -22,8 +27,10 @@ const Home = () => {
   const round = useSelector(getRound);
   const score = useSelector(getScore);
   const difficulty = useSelector(getDifficulty);
+  const userAnswer = useSelector(getSelectedAnswer);
+  const correctAnswer = useSelector(getCorrectAnswer);
 
-  useState(() => {
+  useEffect(() => {
     const configureToken = async () => {
       const response = await gameApi.get(`/api_token.php?command=request`);
       if (response.data.response_code === 1) {
@@ -58,8 +65,18 @@ const Home = () => {
     );
   };
 
-  const handleSelectClick = () => {
-    dispatch(Inc({ round: 1, score: 0 }));
+  const handleSelect = () => {
+    if (userAnswer === correctAnswer) {
+      dispatch(Inc({ round: 1, score: 1 }));
+    } else {
+      dispatch(Inc({ round: 1, score: 0 }));
+    }
+    console.log(userAnswer);
+  };
+
+  const selectAnswer = (e) => {
+    // dispatch(setSelectedAnswer(e.target.textContent));
+    handleSelect();
   };
 
   const handleResetClick = () => {
@@ -74,16 +91,12 @@ const Home = () => {
           Score : <span>{score}</span>
         </h3>
       </section>
-      <Game />
+      <Game selectAnswer={selectAnswer} />
       <div className="btn-container">
         <button className="btn" onClick={handleResetClick}>
           restart
         </button>
-        <button
-          className="btn"
-          onClick={handleSelectClick}
-          disabled={round > 9}
-        >
+        <button className="btn" onClick={handleSelect}>
           select
         </button>
       </div>

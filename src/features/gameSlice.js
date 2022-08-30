@@ -16,9 +16,9 @@ const gameSlice = createSlice({
       console.log(payload);
     },
     setDifficulty: (state) => {
-      if (state.round > 4 && state.round < 7) {
+      if (state.score > 4 && state.score < 7) {
         state.difficulty = "medium";
-      } else if (state.round > 7) {
+      } else if (state.score > 7) {
         state.difficulty = "hard";
       } else {
         state.difficulty = "easy";

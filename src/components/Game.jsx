@@ -1,22 +1,34 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { getCorrectAnswer, getShuffeldAnswers } from "../features/answerSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getShuffeldAnswers, setSelectedAnswer } from "../features/answerSlice";
 import { getQuestions } from "../features/questionSlice";
+import { decode } from "html-entities";
 
 import "../styles/Game.css";
 
-const Game = () => {
+const Game = ({ selectAnswer }) => {
+  const dispatch = useDispatch();
   const question = useSelector(getQuestions);
   const answers = useSelector(getShuffeldAnswers);
-  const correctAnswer = useSelector(getCorrectAnswer);
+
+  const handleClick = (e) => {
+    const { textContent } = e.target;
+    dispatch(setSelectedAnswer(textContent));
+    console.log(textContent);
+  };
 
   return (
     <section className="question-answer">
-      <h1 className="question">{question}</h1>
+      <h1 className="question">{decode(question)}</h1>
       <div className="options">
         {answers.map((item, index) => (
-          <button className="option-btn" key={index}>
-            {item}
+          <button
+            className="option-btn"
+            key={index}
+            onDoubleClick={selectAnswer}
+            onClick={handleClick}
+          >
+            {decode(item)}
           </button>
         ))}
       </div>

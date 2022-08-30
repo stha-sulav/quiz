@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getDifficulty,
   getRound,
-  getScore,
   Restart,
   setDifficulty,
 } from "../features/gameSlice";
@@ -14,10 +13,10 @@ import {
   getAnswers,
   getCorrectAnswer,
   getSelectedAnswer,
-  setSelectedAnswer,
 } from "../features/answerSlice";
 import { getQuestion } from "../features/questionSlice";
-import { Inc } from "../features/gameSlice";
+import Header from "../components/Header";
+import ButtonContainer from "../components/ButtonContainer";
 
 const Home = () => {
   const [token, setToken] = useState("");
@@ -25,7 +24,6 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const round = useSelector(getRound);
-  const score = useSelector(getScore);
   const difficulty = useSelector(getDifficulty);
   const userAnswer = useSelector(getSelectedAnswer);
   const correctAnswer = useSelector(getCorrectAnswer);
@@ -41,6 +39,8 @@ const Home = () => {
     };
 
     configureToken();
+
+    dispatch(Restart());
   }, []);
 
   useEffect(() => {
@@ -65,44 +65,11 @@ const Home = () => {
     );
   };
 
-  const handleSelect = (rounds = 0, scores = 0) => {
-    if (userAnswer === correctAnswer) {
-      dispatch(Inc({ round: rounds, score: scores }));
-    } else {
-      dispatch(Inc({ round: rounds, score: scores }));
-    }
-    console.log(userAnswer);
-  };
-
-  const selectAnswer = (e) => {
-    // dispatch(setSelectedAnswer(e.target.textContent));
-    handleSelect();
-  };
-
-  const handleResetClick = () => {
-    dispatch(Restart());
-  };
-
   return (
     <main>
-      <section className="header">
-        <h1 className="round">Question Number : {round}/10</h1>
-        <h3 className="score">
-          Score : <span>{score}</span>
-        </h3>
-      </section>
-      <Game selectAnswer={selectAnswer} />
-      <div className="btn-container">
-        <button className="btn" onClick={handleResetClick}>
-          restart
-        </button>
-        <button className="btn" onClick={() => handleSelect(0, 1)}>
-          check answer
-        </button>
-        <button className="btn" onClick={() => handleSelect(1, 0)}>
-          next question
-        </button>
-      </div>
+      <Header />
+      <Game />
+      <ButtonContainer />
     </main>
   );
 };

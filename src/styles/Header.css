@@ -1,7 +1,10 @@
-main {
-  padding: 3rem;
+.header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 0.5rem;
+}
+
+.score span {
+  color: #319da0;
 }

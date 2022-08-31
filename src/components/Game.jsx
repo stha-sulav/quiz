@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getShuffeldAnswers, setSelectedAnswer } from "../features/answerSlice";
 import { getQuestions } from "../features/questionSlice";
 import { decode } from "html-entities";
 
 import "../styles/Game.css";
+import { isChecked } from "../features/gameSlice";
 
 const Game = () => {
   const dispatch = useDispatch();
   const question = useSelector(getQuestions);
   const answers = useSelector(getShuffeldAnswers);
+  const checked = useSelector(isChecked);
 
   const handleClick = (e) => {
     const { textContent } = e.target;
@@ -22,7 +24,12 @@ const Game = () => {
       <h1 className="question">{decode(question)}</h1>
       <div className="options">
         {answers.map((item, index) => (
-          <button className="option-btn" key={index} onClick={handleClick}>
+          <button
+            className="option-btn"
+            key={index}
+            onClick={handleClick}
+            disabled={checked}
+          >
             {decode(item)}
           </button>
         ))}

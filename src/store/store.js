@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { answerReducer } from "../features/answerSlice";
 import { gameReducer } from "../features/gameSlice";
+import { msgReducer } from "../features/msgSlice";
 import { questionReducer } from "../features/questionSlice";
 
 export const store = configureStore({
@@ -8,5 +9,6 @@ export const store = configureStore({
     quiz: gameReducer,
     question: questionReducer,
     answers: answerReducer,
+    msg: msgReducer,
   },
 });

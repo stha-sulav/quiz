@@ -7,16 +7,15 @@ import {
   getDifficulty,
   getRound,
   Restart,
+  setChecked,
   setDifficulty,
 } from "../features/gameSlice";
-import {
-  getAnswers,
-  getCorrectAnswer,
-  getSelectedAnswer,
-} from "../features/answerSlice";
+import { getAnswers } from "../features/answerSlice";
 import { getQuestion } from "../features/questionSlice";
 import Header from "../components/Header";
 import ButtonContainer from "../components/ButtonContainer";
+import Message from "../components/Message";
+import { isMsgShown } from "../features/msgSlice";
 
 const Home = () => {
   const [token, setToken] = useState("");
@@ -24,9 +23,10 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const round = useSelector(getRound);
+
   const difficulty = useSelector(getDifficulty);
-  const userAnswer = useSelector(getSelectedAnswer);
-  const correctAnswer = useSelector(getCorrectAnswer);
+
+  const msgShown = useSelector(isMsgShown);
 
   useEffect(() => {
     const configureToken = async () => {
@@ -46,6 +46,7 @@ const Home = () => {
   useEffect(() => {
     fetchQnA();
     dispatch(setDifficulty());
+    dispatch(setChecked(false));
   }, [round]);
 
   const fetchQnA = async () => {
@@ -67,6 +68,7 @@ const Home = () => {
 
   return (
     <main>
+      {msgShown && <Message />}
       <Header />
       <Game />
       <ButtonContainer />

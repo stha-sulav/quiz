@@ -1,9 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getAnswersType,
   getCorrectAnswer,
-  getIsCorrect,
   getSelectedAnswer,
   getShuffeldAnswers,
   setSelectedAnswer,
@@ -21,11 +19,6 @@ const Game = () => {
   const checked = useSelector(isChecked);
   const correctAnswer = useSelector(getCorrectAnswer);
   const userAnswer = useSelector(getSelectedAnswer);
-  const isCorrect = useSelector(getIsCorrect);
-  const classType = useSelector(getAnswersType);
-
-  // const getCorrectAnswerIndex = answers.indexOf(correctAnswer);
-  // const getUserSelectIndex = answers.indexOf(userAnswer);
 
   const handleClick = (e) => {
     const { textContent } = e.target;

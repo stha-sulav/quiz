@@ -16,9 +16,12 @@ import Header from "../components/Header";
 import ButtonContainer from "../components/ButtonContainer";
 import Message from "../components/Message";
 import { isMsgShown } from "../features/msgSlice";
+import Loading from "../components/Loading";
 
 const Home = () => {
   const [token, setToken] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -50,6 +53,7 @@ const Home = () => {
   }, [round]);
 
   const fetchQnA = async () => {
+    setIsLoading(true);
     const response = await gameApi
       .get(
         `/api.php?amount=1&difficulty=${difficulty}&type=multiple&token=${token}`
@@ -64,7 +68,12 @@ const Home = () => {
         correct_answer: data.correct_answer,
       })
     );
+    setIsLoading(false);
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <main>

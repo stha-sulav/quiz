@@ -13,7 +13,6 @@ const msgslice = createSlice({
       state.msg = msg;
       state.isMsgShown = showMsg;
       state.type = msgType;
-      console.log(state.msg);
     },
   },
 });

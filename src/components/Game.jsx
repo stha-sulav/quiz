@@ -1,6 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getShuffeldAnswers, setSelectedAnswer } from "../features/answerSlice";
+import {
+  getAnswersType,
+  getCorrectAnswer,
+  getIsCorrect,
+  getSelectedAnswer,
+  getShuffeldAnswers,
+  setSelectedAnswer,
+} from "../features/answerSlice";
 import { getQuestions } from "../features/questionSlice";
 import { decode } from "html-entities";
 
@@ -12,11 +19,30 @@ const Game = () => {
   const question = useSelector(getQuestions);
   const answers = useSelector(getShuffeldAnswers);
   const checked = useSelector(isChecked);
+  const correctAnswer = useSelector(getCorrectAnswer);
+  const userAnswer = useSelector(getSelectedAnswer);
+  const isCorrect = useSelector(getIsCorrect);
+  const classType = useSelector(getAnswersType);
+
+  // const getCorrectAnswerIndex = answers.indexOf(correctAnswer);
+  // const getUserSelectIndex = answers.indexOf(userAnswer);
 
   const handleClick = (e) => {
     const { textContent } = e.target;
     dispatch(setSelectedAnswer(textContent));
-    console.log(textContent);
+  };
+
+  const answerColor = (item) => {
+    if (item === correctAnswer) {
+      return "success";
+    }
+
+    if (item === userAnswer) {
+      if (item !== correctAnswer) {
+        console.log(userAnswer);
+        return "error";
+      }
+    }
   };
 
   return (
@@ -25,7 +51,7 @@ const Game = () => {
       <div className="options">
         {answers.map((item, index) => (
           <button
-            className="option-btn"
+            className={`option-btn ${checked && answerColor(item)}`}
             key={index}
             onClick={handleClick}
             disabled={checked}

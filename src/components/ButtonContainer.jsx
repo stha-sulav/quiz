@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  checkAnswer,
   getCorrectAnswer,
   getSelectedAnswer,
   setSelectedAnswer,
@@ -19,9 +20,11 @@ const ButtonContainer = () => {
     if (userAnswer && userAnswer === correctAnswer) {
       dispatch(Inc({ round: 0, score: 1 }));
       dispatch(setMsg({ msg: "Correct", showMsg: true, msgType: "success" }));
+      dispatch(checkAnswer(true));
     } else {
       dispatch(Inc({ round: 0, score: 0 }));
       dispatch(setMsg({ msg: "Incorrect", showMsg: true, msgType: "error" }));
+      dispatch(checkAnswer(false));
     }
 
     if (!userAnswer) {
@@ -34,12 +37,12 @@ const ButtonContainer = () => {
       );
     } else {
       dispatch(setChecked(true));
-      dispatch(setSelectedAnswer(""));
     }
   };
 
   const handleNext = () => {
     dispatch(Inc({ round: 1, score: 0 }));
+    dispatch(setSelectedAnswer(""));
   };
 
   const handleRestart = () => {

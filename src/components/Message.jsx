@@ -10,8 +10,6 @@ const Message = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("msg component run");
-
     const timeout = setTimeout(() => {
       dispatch(setMsg({ msg: "", showMsg: false, msgType: "" }));
     }, 3000);
@@ -19,7 +17,11 @@ const Message = () => {
     return () => clearTimeout(timeout);
   }, [msg]);
 
-  return <div className={`notification ${msgType ? msgType : ""}`}>{msg}</div>;
+  return (
+    <div className={`notification ${msgType ? msgType : ""}`}>
+      <h3 className="msg-text">{msg}</h3>
+    </div>
+  );
 };
 
 export default Message;

@@ -9,7 +9,9 @@ const Header = () => {
 
   return (
     <section className="header">
-      <h1 className="round">Question Number : {round}/10</h1>
+      <h1 className="round">
+        Question Number : {round === 0 ? round + 1 : round}/10
+      </h1>
       <h3 className="score">
         Score : <span>{score}</span>
       </h3>

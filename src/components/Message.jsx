@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMsg, getMsgType, setMsg } from "../features/msgSlice";
+import "../styles/Message.css";
 
 const Message = () => {
   const msg = useSelector(getMsg);

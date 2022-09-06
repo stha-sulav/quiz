@@ -43,14 +43,11 @@ const ButtonContainer = () => {
   const handleNext = () => {
     dispatch(Inc({ round: 1, score: 0 }));
     dispatch(setSelectedAnswer(""));
+    dispatch(setMsg({ showMsg: "false" }));
   };
 
   const handleRestart = () => {
     dispatch(Restart());
-  };
-
-  const handleSkip = () => {
-    dispatch(Inc({ round: 1, score: 0 }));
   };
 
   return (
@@ -58,7 +55,6 @@ const ButtonContainer = () => {
       <Buttons name={"restart"} clickFunc={handleRestart} />
       <Buttons name={"check"} clickFunc={handleCheck} />
       <Buttons name={"next"} clickFunc={handleNext} />
-      <Buttons name={"skip"} clickFunc={handleSkip} />
     </div>
   );
 };

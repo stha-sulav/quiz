@@ -43,11 +43,13 @@
 }
 
 .success {
-  background-color: green;
+  background-color: rgba(34, 187, 52, 0.85);
   color: #fff;
+  border: none;
 }
 
 .error {
-  background-color: red;
+  background-color: rgba(187, 33, 35, 0.85);
   color: #fff;
+  border: none;
 }

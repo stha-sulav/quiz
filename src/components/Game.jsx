@@ -10,7 +10,9 @@ import { getQuestions } from "../features/questionSlice";
 import { decode } from "html-entities";
 
 import "../styles/Game.css";
-import { isChecked } from "../features/gameSlice";
+import { getRound, isChecked } from "../features/gameSlice";
+import Modal from "./Modal";
+import { getIsModalOpen } from "../features/modalSlice";
 
 const Game = () => {
   const dispatch = useDispatch();
@@ -19,6 +21,8 @@ const Game = () => {
   const checked = useSelector(isChecked);
   const correctAnswer = useSelector(getCorrectAnswer);
   const userAnswer = useSelector(getSelectedAnswer);
+  const isModalOpen = useSelector(getIsModalOpen);
+  const round = useSelector(getRound);
 
   const handleClick = (e) => {
     const { textContent } = e.target;
@@ -53,6 +57,7 @@ const Game = () => {
           </button>
         ))}
       </div>
+      {isModalOpen && <Modal show={round > 9 ? false : true} />}
     </section>
   );
 };

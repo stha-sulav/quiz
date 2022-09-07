@@ -5,7 +5,6 @@ const initialState = {
   correctAnswer: "",
   selectedAnswer: "",
   isCorrect: "",
-  type: "",
 };
 
 const shuffel = (arr) => {
@@ -30,24 +29,14 @@ const answerSlice = createSlice({
     setSelectedAnswer: (state, { payload }) => {
       state.selectedAnswer = payload;
     },
-    checkAnswer: (state, { payload }) => {
-      state.isCorrect = payload;
-      if (state.isCorrect) {
-        state.type = "sucess";
-      } else {
-        state.type = "error";
-      }
-    },
   },
 });
 
 export const answerReducer = answerSlice.reducer;
 
-export const { getAnswers, setSelectedAnswer, checkAnswer } =
-  answerSlice.actions;
+export const { getAnswers, setSelectedAnswer } = answerSlice.actions;
 
 export const getShuffeldAnswers = (state) => state.answers.answers;
 export const getCorrectAnswer = (state) => state.answers.correctAnswer;
 export const getSelectedAnswer = (state) => state.answers.selectedAnswer;
 export const getIsCorrect = (state) => state.answers.isCorrect;
-export const getAnswersType = (state) => state.answers.type;

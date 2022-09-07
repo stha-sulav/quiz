@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   score: 0,
-  round: 0,
+  round: 1,
   difficulty: "easy",
   isChecked: false,
 };
@@ -16,9 +16,9 @@ const gameSlice = createSlice({
       state.round += payload.round;
     },
     setDifficulty: (state) => {
-      if (state.score > 4 && state.score < 7) {
+      if (state.score > 5 && state.score < 8) {
         state.difficulty = "medium";
-      } else if (state.score > 7) {
+      } else if (state.score > 8) {
         state.difficulty = "hard";
       } else {
         state.difficulty = "easy";

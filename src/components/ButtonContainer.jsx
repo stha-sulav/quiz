@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  checkAnswer,
   getCorrectAnswer,
   getSelectedAnswer,
   setSelectedAnswer,
 } from "../features/answerSlice";
-import { Inc, Restart, setChecked } from "../features/gameSlice";
+import { getRound, Inc, setChecked } from "../features/gameSlice";
+import { setMoadlText, setModal } from "../features/modalSlice";
 import { setMsg } from "../features/msgSlice";
 import "../styles/ButtonContainer.css";
 import Buttons from "./Buttons";
 
 const ButtonContainer = () => {
   const dispatch = useDispatch();
+  const round = useSelector(getRound);
   const userAnswer = useSelector(getSelectedAnswer);
   const correctAnswer = useSelector(getCorrectAnswer);
 
@@ -20,11 +21,9 @@ const ButtonContainer = () => {
     if (userAnswer && userAnswer === correctAnswer) {
       dispatch(Inc({ round: 0, score: 1 }));
       dispatch(setMsg({ msg: "Correct", showMsg: true, msgType: "success" }));
-      dispatch(checkAnswer(true));
     } else {
       dispatch(Inc({ round: 0, score: 0 }));
       dispatch(setMsg({ msg: "Incorrect", showMsg: true, msgType: "error" }));
-      dispatch(checkAnswer(false));
     }
 
     if (!userAnswer) {
@@ -41,13 +40,22 @@ const ButtonContainer = () => {
   };
 
   const handleNext = () => {
-    dispatch(Inc({ round: 1, score: 0 }));
+    if (round > 9) {
+      dispatch(setModal());
+      dispatch(setMoadlText({ text: "Do you want to play again?" }));
+    } else {
+      dispatch(Inc({ round: 1, score: 0 }));
+      dispatch(setMsg({ showMsg: "false" }));
+    }
     dispatch(setSelectedAnswer(""));
-    dispatch(setMsg({ showMsg: "false" }));
   };
 
   const handleRestart = () => {
-    dispatch(Restart());
+    dispatch(setSelectedAnswer(""));
+    dispatch(setModal());
+    dispatch(
+      setMoadlText({ text: "Are you sure you want to restart the game?" })
+    );
   };
 
   return (

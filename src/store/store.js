@@ -3,6 +3,7 @@ import { answerReducer } from "../features/answerSlice";
 import { gameReducer } from "../features/gameSlice";
 import { modalReducer } from "../features/modalSlice";
 import { msgReducer } from "../features/msgSlice";
+import { playerReducer } from "../features/playerSlice";
 import { questionReducer } from "../features/questionSlice";
 
 export const store = configureStore({
@@ -12,5 +13,6 @@ export const store = configureStore({
     answers: answerReducer,
     msg: msgReducer,
     modal: modalReducer,
+    player: playerReducer,
   },
 });

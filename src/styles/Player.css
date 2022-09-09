@@ -1,0 +1,16 @@
+.name-form {
+  height: 50vh;
+  display: grid;
+  place-content: center;
+  gap: 2rem;
+}
+
+.player-name {
+  border: none;
+  outline: 2px solid #333;
+  background-color: transparent;
+}
+
+.player-name:focus {
+  outline-color: #781c68;
+}

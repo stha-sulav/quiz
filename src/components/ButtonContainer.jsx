@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCorrectAnswer,
@@ -42,7 +42,11 @@ const ButtonContainer = () => {
   const handleNext = () => {
     if (round > 9) {
       dispatch(setModal());
-      dispatch(setMoadlText({ text: "Do you want to play again?" }));
+      dispatch(
+        setMoadlText({
+          text: `Do you want to play again?`,
+        })
+      );
     } else {
       dispatch(Inc({ round: 1, score: 0 }));
       dispatch(setMsg({ showMsg: "false" }));

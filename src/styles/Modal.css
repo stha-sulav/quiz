@@ -24,3 +24,12 @@
   right: 20%;
   color: #fff;
 }
+
+.modal-title {
+  margin-bottom: 0.5rem;
+}
+
+.modal-title,
+.modal-text {
+  text-align: center;
+}

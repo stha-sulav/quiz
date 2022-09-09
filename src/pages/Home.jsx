@@ -17,6 +17,8 @@ import ButtonContainer from "../components/ButtonContainer";
 import Message from "../components/Message";
 import { isMsgShown } from "../features/msgSlice";
 import Loading from "../components/Loading";
+import Player from "./Player";
+import { getPlayerName } from "../features/playerSlice";
 
 const Home = () => {
   const [token, setToken] = useState("");
@@ -30,6 +32,8 @@ const Home = () => {
   const difficulty = useSelector(getDifficulty);
 
   const msgShown = useSelector(isMsgShown);
+
+  const playerName = useSelector(getPlayerName);
 
   useEffect(() => {
     const configureToken = async () => {
@@ -78,9 +82,15 @@ const Home = () => {
   return (
     <main>
       {msgShown && <Message />}
-      <Header />
-      <Game />
-      <ButtonContainer />
+      {!playerName ? (
+        <Player />
+      ) : (
+        <>
+          <Header />
+          <Game />
+          <ButtonContainer />
+        </>
+      )}
     </main>
   );
 };

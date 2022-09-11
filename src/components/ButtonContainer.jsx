@@ -8,6 +8,7 @@ import {
 import { getRound, Inc, setChecked } from "../features/gameSlice";
 import { setMoadlText, setModal } from "../features/modalSlice";
 import { setMsg } from "../features/msgSlice";
+import { setPlayerName } from "../features/playerSlice";
 import "../styles/ButtonContainer.css";
 import Buttons from "./Buttons";
 
@@ -54,6 +55,10 @@ const ButtonContainer = () => {
     dispatch(setSelectedAnswer(""));
   };
 
+  const handleNewGame = () => {
+    dispatch(setPlayerName({ name: "" }));
+  };
+
   const handleRestart = () => {
     dispatch(setSelectedAnswer(""));
     dispatch(setModal());
@@ -64,6 +69,7 @@ const ButtonContainer = () => {
 
   return (
     <div className="btn-container">
+      <Buttons name={"new game"} clickFunc={handleNewGame} />
       <Buttons name={"restart"} clickFunc={handleRestart} />
       <Buttons name={"check"} clickFunc={handleCheck} />
       <Buttons name={"next"} clickFunc={handleNext} />

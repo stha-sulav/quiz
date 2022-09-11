@@ -1,14 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Buttons from "../components/Buttons";
 import ScoreList from "../components/ScoreList";
-import { getAllPlayers } from "../features/playerSlice";
+import { getAllPlayers, setPlayerName } from "../features/playerSlice";
 import "../styles/Score.css";
 
 const Score = () => {
+  const dispatch = useDispatch();
   const allPLayers = useSelector(getAllPlayers);
-  console.log(allPLayers);
+
+  const handleNewGame = () => {
+    dispatch(setPlayerName({ name: "" }));
+  };
 
   return (
     <section className="score-section">
@@ -21,9 +25,15 @@ const Score = () => {
             <ScoreList players={allPLayers} />
           </>
         )}
-        <Link to={"/"}>
-          <Buttons name={"Go back to home"} />
-        </Link>
+        <div className="btn-container">
+          <Link to={"/"} onClick={handleNewGame}>
+            <Buttons name={"new game"} />
+          </Link>
+
+          <Link to={"/"}>
+            <Buttons name={"Go back to home"} />
+          </Link>
+        </div>
       </div>
     </section>
   );

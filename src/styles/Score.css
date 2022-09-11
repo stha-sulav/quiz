@@ -17,3 +17,7 @@
   text-transform: capitalize;
   text-align: center;
 }
+
+.content .btn-container {
+  width: 32%;
+}

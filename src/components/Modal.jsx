@@ -22,6 +22,7 @@ const Modal = ({ show }) => {
 
   const handleCancel = () => {
     dispatch(setModal());
+    dispatch(setPlayers({ score: score }));
   };
 
   return (

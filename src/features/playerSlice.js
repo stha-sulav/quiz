@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const data = localStorage.getItem("playerScore");
+
 const playerSlice = createSlice({
   name: "player",
   initialState: {
     playerName: "",
-    players: [],
+    players: data ? JSON.parse(data) : [],
   },
   reducers: {
     setPlayerName: (state, { payload }) => {
@@ -19,8 +21,8 @@ const playerSlice = createSlice({
           name: state.playerName,
           score: score,
         },
-      ];
-      console.log(state.players.name);
+      ].sort((a, b) => b.score - a.score);
+      localStorage.setItem("playerScore", JSON.stringify(state.players));
     },
   },
 });

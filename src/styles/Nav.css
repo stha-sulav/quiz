@@ -1,13 +1,30 @@
-nav {
+header {
   background-color: #781c68;
+}
+
+nav {
+  margin: auto;
+  padding: 1rem 2rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 4rem;
+  justify-content: space-between;
   color: #fff;
+  gap: 1rem;
+  max-width: 1200px;
 }
 
 .nav-links {
   display: flex;
   gap: 2rem;
+}
+
+.logo:hover,
+.nav-links li:hover {
+  opacity: 0.85;
+}
+
+@media only screen and (min-width: 800px) {
+  nav {
+    padding: 1.25rem 4rem;
+  }
 }

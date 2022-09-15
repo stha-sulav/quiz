@@ -19,7 +19,11 @@ const About = () => {
           If restarted the point and round get default to 0 and 1 respectively.
         </li>
         <li className="point">
-          <a href="https://google.com" className="link" target="_blank">
+          <a
+            href="https://github.com/Who-codes/quiz"
+            className="link"
+            target="_blank"
+          >
             Click here
           </a>{" "}
           for source code.

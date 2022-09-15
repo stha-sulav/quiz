@@ -11,6 +11,7 @@
 body {
   background-color: #fff5e1;
   font-family: "Roboto Slab", serif;
+  font-size: 0.8rem;
 }
 
 a {
@@ -34,4 +35,40 @@ button {
   letter-spacing: 1.75px;
   font-weight: normal;
   transition: 0.25s;
+}
+
+.success {
+  background-color: rgba(34, 187, 52, 0.85);
+  color: #fff;
+  border: none;
+}
+
+.error {
+  background-color: rgba(187, 33, 35, 0.85);
+  color: #fff;
+  border: none;
+}
+
+@media only screen and (min-width: 600px) {
+  body {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  body {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  body {
+    font-size: 1.15rem;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  body {
+    font-size: 1.25rem;
+  }
 }

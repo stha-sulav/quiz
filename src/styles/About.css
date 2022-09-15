@@ -1,20 +1,22 @@
 .about-section {
-  padding: 2rem;
+  width: 80%;
+  margin: auto;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   align-items: center;
+  padding: 1rem;
 }
 
 .about-title {
   letter-spacing: 2px;
+  text-align: center;
 }
 
 .about-content {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  font-size: 1.25rem;
   color: #fff;
 }
 
@@ -22,6 +24,7 @@
   background-color: #781c69;
   padding: 0.75rem 2rem;
   border-radius: 4px;
+  font-size: 0.9rem;
 }
 
 .link {
@@ -31,4 +34,24 @@
 
 .link:hover {
   color: #eee;
+}
+
+@media only screen and (min-width: 800px) {
+  .about-section {
+    padding: 1.5rem;
+  }
+
+  .about-content {
+    font-size: 1.05rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .about-section {
+    padding: 1.75rem 1rem;
+  }
+
+  .point {
+    font-size: 1.15rem;
+  }
 }

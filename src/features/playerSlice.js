@@ -22,6 +22,10 @@ const playerSlice = createSlice({
           score: score,
         },
       ].sort((a, b) => b.score - a.score);
+      if (state.players.length > 5) {
+        state.players.pop();
+      }
+
       localStorage.setItem("playerScore", JSON.stringify(state.players));
     },
   },

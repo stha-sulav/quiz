@@ -19,5 +19,20 @@
 }
 
 .content .btn-container {
-  width: 32%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-container a,
+.btn-container button {
+  width: 100%;
+  max-width: 250px;
+}
+
+@media only screen and (min-width: 800px) {
+  .content .btn-container {
+    flex-direction: row;
+    justify-content: center;
+  }
 }

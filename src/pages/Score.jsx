@@ -40,17 +40,3 @@ const Score = () => {
 };
 
 export default Score;
-
-// {
-//   <ul>
-//     {allPLayers.map((item, index) => {
-//       const { name, score } = item;
-//       return (
-//         <li key={index}>
-//           <h4>{name}</h4>
-//           <p>{score}</p>
-//         </li>
-//       );
-//     })}
-//   </ul>;
-// }

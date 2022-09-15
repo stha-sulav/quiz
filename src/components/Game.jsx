@@ -44,7 +44,7 @@ const Game = () => {
 
   return (
     <section className="question-answer">
-      <h1 className="question">{decode(question)}</h1>
+      <h2 className="question">{decode(question)}</h2>
       <div className="options">
         {answers.map((item, index) => (
           <button

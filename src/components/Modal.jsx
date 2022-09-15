@@ -39,7 +39,9 @@ const Modal = ({ show }) => {
           ) : (
             <Buttons name={"Restart"} clickFunc={handleRestartAndPlay} />
           )}
-          <Buttons name={"cancel"} clickFunc={handleCancel} />
+          <Link to={"/score"}>
+            <Buttons name={"Score"} />
+          </Link>
         </div>
       </div>
     </>

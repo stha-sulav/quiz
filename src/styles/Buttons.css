@@ -3,7 +3,7 @@
   outline: none;
   background-color: #319da0;
   border-radius: 4px;
-  font-size: 1.25rem;
+  font-size: 1.05rem;
   color: #fff;
 }
 
@@ -14,4 +14,10 @@
 .btn:active {
   transform: scale(0.9);
   text-decoration: none;
+}
+
+@media only screen and (min-width: 600px) {
+  .btn {
+    font-size: 1.25rem;
+  }
 }

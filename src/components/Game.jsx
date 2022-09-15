@@ -36,7 +36,6 @@ const Game = () => {
 
     if (item === userAnswer) {
       if (item !== correctAnswer) {
-        console.log(userAnswer);
         return "error";
       }
     }

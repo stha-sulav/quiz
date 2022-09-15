@@ -28,12 +28,18 @@ const playerSlice = createSlice({
 
       localStorage.setItem("playerScore", JSON.stringify(state.players));
     },
+    removeScore: (state, { payload }) => {
+      const { name } = payload;
+      state.players = state.players.filter((item) => item.name !== name);
+      localStorage.clear();
+      localStorage.setItem("playerScore", JSON.stringify(state.players));
+    },
   },
 });
 
 export const playerReducer = playerSlice.reducer;
 
-export const { setPlayerName, setPlayers } = playerSlice.actions;
+export const { setPlayerName, setPlayers, removeScore } = playerSlice.actions;
 
 export const getPlayerName = (state) => state.player.playerName;
 

@@ -8,12 +8,35 @@
 .player {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 80%;
   padding: 1rem;
   margin: auto;
   background-color: #283d3b;
   color: #fff;
   border-radius: 4px;
+}
+
+.players-name {
+  flex-basis: 50%;
+}
+
+.rm-btn {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+}
+
+.player .hide {
+  display: none;
+}
+
+.player .show {
+  display: block;
+}
+
+.rm-btn:active {
+  color: rgba(187, 33, 35, 0.85);
 }
 
 @media only screen and (min-width: 800px) {

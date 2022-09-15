@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Buttons from "../components/Buttons";
 import ScoreList from "../components/ScoreList";
+import { setMsg } from "../features/msgSlice";
 import { getAllPlayers, setPlayerName } from "../features/playerSlice";
 import "../styles/Score.css";
 
@@ -12,6 +13,11 @@ const Score = () => {
 
   const handleNewGame = () => {
     dispatch(setPlayerName({ name: "" }));
+    hideMsg();
+  };
+
+  const hideMsg = () => {
+    dispatch(setMsg({ showMsg: false }));
   };
 
   return (
@@ -30,7 +36,7 @@ const Score = () => {
             <Buttons name={"new game"} />
           </Link>
 
-          <Link to={"/"}>
+          <Link to={"/"} onClick={hideMsg}>
             <Buttons name={"Go back to home"} />
           </Link>
         </div>

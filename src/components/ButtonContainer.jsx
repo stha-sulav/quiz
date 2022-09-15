@@ -5,7 +5,7 @@ import {
   getSelectedAnswer,
   setSelectedAnswer,
 } from "../features/answerSlice";
-import { getRound, Inc, setChecked } from "../features/gameSlice";
+import { getRound, Inc, isChecked, setChecked } from "../features/gameSlice";
 import { setMoadlText, setModal } from "../features/modalSlice";
 import { setMsg } from "../features/msgSlice";
 import { setPlayerName } from "../features/playerSlice";
@@ -17,17 +17,21 @@ const ButtonContainer = () => {
   const round = useSelector(getRound);
   const userAnswer = useSelector(getSelectedAnswer);
   const correctAnswer = useSelector(getCorrectAnswer);
+  const checked = useSelector(isChecked);
 
   const handleCheck = () => {
-    if (userAnswer && userAnswer === correctAnswer) {
-      dispatch(Inc({ round: 0, score: 1 }));
-      dispatch(setMsg({ msg: "Correct", showMsg: true, msgType: "success" }));
-    } else {
-      dispatch(Inc({ round: 0, score: 0 }));
-      dispatch(setMsg({ msg: "Incorrect", showMsg: true, msgType: "error" }));
+    if (userAnswer && !checked) {
+      if (userAnswer === correctAnswer) {
+        dispatch(Inc({ round: 0, score: 1 }));
+        dispatch(setMsg({ msg: "Correct", showMsg: true, msgType: "success" }));
+      } else {
+        dispatch(Inc({ round: 0, score: 0 }));
+        dispatch(setMsg({ msg: "Incorrect", showMsg: true, msgType: "error" }));
+        userAnswer === correctAnswer;
+      }
     }
 
-    if (!userAnswer) {
+    if (!userAnswer && !checked) {
       dispatch(
         setMsg({
           msg: "No answer selected to check",

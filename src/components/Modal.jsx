@@ -20,7 +20,7 @@ const Modal = ({ show }) => {
     dispatch(setMsg({ showMsg: false }));
   };
 
-  const handleCancel = () => {
+  const handleClick = () => {
     dispatch(setModal());
     dispatch(setPlayers({ score: score }));
   };
@@ -39,7 +39,7 @@ const Modal = ({ show }) => {
           ) : (
             <Buttons name={"Restart"} clickFunc={handleRestartAndPlay} />
           )}
-          <Link to={"/score"}>
+          <Link to={"/score"} onClick={handleClick}>
             <Buttons name={"Score"} />
           </Link>
         </div>

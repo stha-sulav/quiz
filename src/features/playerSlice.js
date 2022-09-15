@@ -2,6 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const data = localStorage.getItem("playerScore");
 
+const uniquePlayer = (state, score) => {
+  const existingPlayer = state.players.find(
+    (item) => item.name === state.playerName
+  );
+
+  existingPlayer.score = score;
+
+  state.players = state.players.filter(
+    (item) => item.name !== existingPlayer.name
+  );
+
+  state.players = [...state.players, existingPlayer];
+};
+
 const playerSlice = createSlice({
   name: "player",
   initialState: {
@@ -13,15 +27,17 @@ const playerSlice = createSlice({
       const { name } = payload;
       state.playerName = name;
     },
+
     setPlayers: (state, { payload }) => {
       const { score } = payload;
+
       state.players = [
         ...state.players,
-        {
-          name: state.playerName,
-          score: score,
-        },
+        { name: state.playerName, score: score },
       ].sort((a, b) => b.score - a.score);
+
+      uniquePlayer(state, score);
+
       if (state.players.length > 5) {
         state.players.pop();
       }

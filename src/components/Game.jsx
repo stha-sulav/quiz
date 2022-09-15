@@ -13,6 +13,8 @@ import "../styles/Game.css";
 import { getRound, isChecked } from "../features/gameSlice";
 import Modal from "./Modal";
 import { getIsModalOpen } from "../features/modalSlice";
+import Confetti from "react-confetti";
+import useWindowsDimention from "../useWindowsDimention";
 
 const Game = () => {
   const dispatch = useDispatch();
@@ -23,6 +25,7 @@ const Game = () => {
   const userAnswer = useSelector(getSelectedAnswer);
   const isModalOpen = useSelector(getIsModalOpen);
   const round = useSelector(getRound);
+  const { width, height } = useWindowsDimention();
 
   const handleClick = (e) => {
     const { textContent } = e.target;
@@ -56,6 +59,9 @@ const Game = () => {
           </button>
         ))}
       </div>
+      {round === 10 && isModalOpen && (
+        <Confetti width={width} height={height} />
+      )}
       {isModalOpen && <Modal show={round > 9 ? false : true} />}
     </section>
   );

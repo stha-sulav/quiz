@@ -17,7 +17,7 @@ const ScoreList = ({ players }) => {
   return (
     <ul className="lists">
       {players.map((item, index) => {
-        const { name, score } = item;
+        let { name, score } = item;
         return (
           <li className="player" key={index}>
             <h4 className="players-name">{name}</h4>
